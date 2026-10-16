@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev City Character Creator</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main id="game-screen">
+
+      <!--Container-->
+      <div class="top-layout">
+
+        <!--Cabeçalho Esquerdo-->
+        <div class="header-left">
+          <p class="eyebrow">BEM VINDO À DEV CITY</p>
+          <p class="support">Sua história começa aqui</p>
+        </div>
+
+        <!--Informações do personagem-->
+        <section class="character-info">
+          <h1 id="character-name">LUCIA</h1>
+
+          <p class="character-description">Uma nova lenda está prestes a surgir em Dev City.</p>
+          <button type="button" class="edit-avatar-button" hidden>Editar Avatar</button>
+        </section>
+      </div>
+
+      <!-- Cenário -->
+      <div class="scene-layer" aria-hidden="true">
+        <!--Cenário aplicado aqui-->
+      </div>
+
+      <!--Personagem-->
+        <div class="character-layer">
+          <p class="imagem-placeholder">Imagem do personagem</p>
+        </div>
+
+      <!--Informações Inferior Esquerda-->
+      <div class="bottom-left">
+        <p class="character-status">ESCOLHA SUA LENDA</p>
+        <p class="guidance-status">Escolha um personagem ou transforme sua própria foto em parte deste universo</p>
+      </div>
+
+      <!--Seleção de Personagens-->
+      <nav class="character-selector" aria-label="Selecionar personagem">
+
+        <p class="call">Seu rosto. Seu personagem. Seu universo.</p>
+
+        <button
+          type="button"
+          class="character-option is-active"
+          aria-label="Selecionar Lucia"
+          aria-pressed="true"
+        >LUCIA</button>
+        <button
+          type="button"
+          class="character-option"
+          aria-label="Selecionar Jason"
+          aria-pressed="false"
+        >JASON</button>
+        <button
+          type="button"
+          class="character-option"
+          aria-label="Selecionar CJ, Carl Johnson"
+          aria-pressed="false"
+        >CJ</button>
+        <button
+          type="button"
+          class="character-option"
+          aria-label="Criar seu personagem"
+          aria-pressed="false"
+        >DEV GABRIEL</button>
+      </nav>
+    </main>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
