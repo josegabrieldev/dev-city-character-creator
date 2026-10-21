@@ -4,75 +4,243 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dev City Character Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
   </head>
   <body>
     <main id="game-screen">
+      <!-- Cenário de fundo -->
+      <div class="scene-layer" aria-hidden="true"></div>
 
-      <!--Container-->
-      <div class="top-layout">
+      <!-- Fundo decorativo do cabeçalho -->
+      <svg
+        class="header-panel"
+        viewBox="0 0 700 230"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient
+            id="header-panel-gradient"
+            x1="0"
+            y1="0"
+            x2="1"
+            y2="0"
+          >
+            <stop offset="0%" stop-color="#080510" stop-opacity="0.78" />
+            <stop offset="58%" stop-color="#080510" stop-opacity="0.65" />
+            <stop offset="82%" stop-color="#080510" stop-opacity="0.35" />
+            <stop offset="100%" stop-color="#080510" stop-opacity="0" />
+          </linearGradient>
+        </defs>
 
-        <!--Cabeçalho Esquerdo-->
-        <div class="header-left">
-          <p class="eyebrow">BEM VINDO À DEV CITY</p>
-          <p class="support">Sua história começa aqui</p>
+        <path
+          class="header-panel-shape"
+          d="M 0 0
+          H 700
+          V 175
+          C 520 190, 300 145, 0 220
+          Z"
+          fill="url(#header-panel-gradient)"
+        />
+      </svg>
+
+      <!-- Cabeçalho superior esquerdo -->
+      <header class="header-left">
+        <div class="brand" aria-label="Dev City">
+          <span class="brand-name"> DEV <span class="accent">CITY</span> </span>
         </div>
 
-        <!--Informações do personagem-->
-        <section class="character-info">
-          <h1 id="character-name">LUCIA</h1>
+        <div class="header-divider" aria-hidden="true"></div>
 
-          <p class="character-description">Uma nova lenda está prestes a surgir em Dev City.</p>
-          <button type="button" class="edit-avatar-button" hidden>Editar Avatar</button>
-        </section>
-      </div>
+        <div class="header-intro">
+          <p class="eyebrow">BEM-VINDO(A) AO</p>
+          <p class="support">CHARACTER CREATOR</p>
+        </div>
+      </header>
 
-      <!-- Cenário -->
-      <div class="scene-layer" aria-hidden="true">
-        <!--Cenário aplicado aqui-->
-      </div>
-
-      <!--Personagem-->
+      <!-- Personagem central -->
+      <section class="character-stage" aria-label="Personagem em destaque">
         <div class="character-layer">
-          <p class="imagem-placeholder">Imagem do personagem</p>
+          <!-- A imagem do personagem será adicionada aqui -->
+          <img
+            src="assets/characters/personagem-01-maya.png"
+            alt="Maya, personagem em destaque"
+            class="character-image"
+          />
         </div>
+      </section>
 
-      <!--Informações Inferior Esquerda-->
-      <div class="bottom-left">
-        <p class="character-status">ESCOLHA SUA LENDA</p>
-        <p class="guidance-status">Escolha um personagem ou transforme sua própria foto em parte deste universo</p>
-      </div>
+      <!-- Informações do personagem: superior direito -->
+      <section class="character-info" aria-labelledby="character-name">
+        <p class="card-eyebrow">PERSONAGEM SELECIONADO</p>
 
-      <!--Seleção de Personagens-->
-      <nav class="character-selector" aria-label="Selecionar personagem">
+        <h1 id="character-name">LUCIA</h1>
 
-        <p class="call">Seu rosto. Seu personagem. Seu universo.</p>
+        <p class="character-tagline">LIVRE, DETERMINADA, SEM LIMITES.</p>
 
-        <button
-          type="button"
-          class="character-option is-active"
-          aria-label="Selecionar Lucia"
-          aria-pressed="true"
-        >LUCIA</button>
-        <button
-          type="button"
-          class="character-option"
-          aria-label="Selecionar Jason"
-          aria-pressed="false"
-        >JASON</button>
-        <button
-          type="button"
-          class="character-option"
-          aria-label="Selecionar CJ, Carl Johnson"
-          aria-pressed="false"
-        >CJ</button>
-        <button
-          type="button"
-          class="character-option"
-          aria-label="Criar seu personagem"
-          aria-pressed="false"
-        >DEV GABRIEL</button>
-      </nav>
+        <p class="character-description">
+          Uma nova lenda está prestes a surgir em Dev City. Sua história começa
+          aqui.
+        </p>
+
+        <div class="avatar-actions" hidden>
+          <div class="avatar-actions-primary">
+            <button
+              type="button"
+              class="avatar-action-button edit-avatar-button"
+            >
+              <svg
+                class="button-frame"
+                viewBox="0 0 240 52"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  class="button-frame-fill"
+                  d="M8 1 H232 L239 8 V44 L232 51 H8 L1 44 V8 Z"
+                />
+                <path
+                  class="button-frame-border"
+                  d="M8 1 H232 L239 8 V44 L232 51 H8 L1 44 V8 Z"
+                />
+              </svg>
+              <span class="material-symbols-outlined"> person_edit </span>
+              Editar Avatar
+            </button>
+            <button
+              type="button"
+              class="avatar-action-button change-scenario-button"
+            >
+              <svg
+                class="button-frame"
+                viewBox="0 0 240 52"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  class="button-frame-fill"
+                  d="M8 1 H232 L239 8 V44 L232 51 H8 L1 44 V8 Z"
+                />
+                <path
+                  class="button-frame-border"
+                  d="M8 1 H232 L239 8 V44 L232 51 H8 L1 44 V8 Z"
+                />
+              </svg>
+              <span class="material-symbols-outlined"> landscape </span>
+              Mudar Cenário
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="avatar-action-button regenerate-avatar-button"
+          >
+          <span class="material-symbols-outlined"> refresh </span>
+            Gerar outro avatar
+          </button>
+        </div>
+      </section>
+
+      <!-- Área inferior: orientação, seleção e marca -->
+      <footer class="bottom-layout">
+        <!-- Painel inferior esquerdo -->
+        <aside class="bottom-left" aria-labelledby="guidance-title">
+          <div class="guidance-icon" aria-hidden="true">
+            <span class="material-symbols-outlined"> stadia_controller </span>
+          </div>
+
+          <h2 id="guidance-title" class="character-status">
+            PRONTO PARA COMEÇAR?
+          </h2>
+
+          <p class="guidance-status">
+            Escolha um personagem ou crie seu próprio avatar. Depois,
+            personalize e entre na sua história.
+          </p>
+
+          <span class="guidance-decoration" aria-hidden="true"></span>
+        </aside>
+
+        <!-- Chamada e seleção central -->
+        <nav class="character-selector" aria-label="Selecionar personagem">
+          <p class="call">
+            SEU ROSTO. SEU PERSONAGEM.
+            <span class="call-accent">SEU UNIVERSO.</span>
+          </p>
+
+          <div class="character-options">
+            <button
+              type="button"
+              class="character-option is-active"
+              aria-label="Selecionar Lucia"
+              aria-pressed="true"
+            >
+              <span class="option-image">
+                <!-- Imagem de Lucia -->
+              </span>
+              <span class="option-name">LUCIA</span>
+            </button>
+
+            <button
+              type="button"
+              class="character-option"
+              aria-label="Selecionar Jason"
+              aria-pressed="false"
+            >
+              <span class="option-image">
+                <!-- Imagem de Jason -->
+              </span>
+              <span class="option-name">JASON</span>
+            </button>
+
+            <button
+              type="button"
+              class="character-option"
+              aria-label="Selecionar CJ, Carl Johnson"
+              aria-pressed="false"
+            >
+              <span class="option-image">
+                <!-- Imagem de CJ -->
+              </span>
+              <span class="option-name">CJ</span>
+            </button>
+
+            <button
+              type="button"
+              class="character-option"
+              aria-label="Criar personagem personalizado"
+              aria-pressed="false"
+            >
+              <span class="option-image option-image-placeholder">
+                <!-- Ícone de avatar personalizado -->
+              </span>
+              <span class="option-name">PERSONALIZADO</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Marca inferior direita -->
+        <div class="footer-brand">
+          <p class="footer-brand-name">DEV <span class="accent">CITY</span></p>
+
+          <p class="footer-brand-description">
+            MAIS QUE UM JOGO,<br />
+            UM MUNDO DE POSSIBILIDADES.
+          </p>
+
+          <span class="footer-decoration" aria-hidden="true"></span>
+        </div>
+      </footer>
     </main>
 
     <script src="js/main.js"></script>
