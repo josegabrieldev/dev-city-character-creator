@@ -1,27 +1,703 @@
+/* =========================================================
+   1. DESIGN SYSTEM — CORES, TIPOGRAFIA E ESPAÇAMENTO
+   ========================================================= */
+
+:root {
+  /* Paleta de cores */
+  --color-primary: #8c26f8;
+  --color-accent: #ffb813;
+
+  --color-background: #080510;
+  --color-surface: #171020;
+  --color-surface-elevated: #292033;
+  --color-border: #35145c;
+
+  --color-text-primary: #f2f0ff;
+  --color-text-secondary: #b8b2d9;
+
+  /* Fontes */
+  --font-display: "Bangers", cursive;
+  --font-padrao: Arial, Helvetica, sans-serif;
+
+  /* Tamanhos de fonte */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-title: clamp(2.5rem, 4vw, 4rem);
+
+  /* Altura das linhas */
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.5;
+
+  /* Espaçamento */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Raios de borda */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+}
+
+/* =========================================================
+   2. RESET E CONFIGURAÇÃO GERAL
+   ========================================================= */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 body {
-    min-height: 100vh;
-    background-color: #17111F;
-    background-image: linear-gradient(
-        135deg,
-        #17111F 0%,
-        #34203F 45%,
-        #702B59 75%,
-        #D75B72 100%
-    );
+  min-height: 100vh;
+  font-family: var(--font-padrao);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
 
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #FFFFFF;
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   3. PALCO PRINCIPAL E CENÁRIO
+   ========================================================= */
+
+#game-screen {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background-color: var(--color-background);
+}
+
+/* Camada da imagem de cenário */
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgb(8 5 16 / 15%) 0%,
+      rgb(8 5 16 / 5%) 45%,
+      rgb(8 5 16 / 78%) 100%
+    ),
+    url("../assets/backgrouns/background2.jpg");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* =========================================================
+   4. CABEÇALHO — SUPERIOR ESQUERDO
+   ========================================================= */
+
+.header-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: min(35rem, 52vw);
+  height: 10rem;
+
+  z-index: 4;
+  pointer-events: none;
+}
+
+.header-left {
+  position: absolute;
+  top: clamp(1.5rem, 4vh, 3rem);
+  left: clamp(1.5rem, 4vw, 4rem);
+  z-index: 5;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+
+  padding: var(--space-3) var(--space-4);
+  background: none;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.accent {
+  color: var(--color-primary);
+}
+
+.header-divider {
+  width: 2px;
+  height: 2.75rem;
+  background: var(--color-accent);
+  transform: skewX(-15deg);
+}
+
+.header-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.eyebrow {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.support {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   5. PERSONAGEM — ÁREA CENTRAL
+   ========================================================= */
+
+.character-stage {
+  position: absolute;
+  z-index: 1;
+
+  left: 50%;
+  bottom: clamp(11rem, 25vh, 17rem);
+
+  width: min(48vw, 42rem);
+  height: min(68vh, 44rem);
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.character-layer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.character-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+/* =========================================================
+   6. CARD DE INFORMAÇÕES — SUPERIOR DIREITO
+   ========================================================= */
+
+.character-info {
+  position: absolute;
+  top: clamp(1.5rem, 4vh, 3rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  z-index: 4;
+
+  width: min(26rem, 31vw);
+  padding: clamp(1.35rem, 2vw, 2rem);
+
+  background: rgb(8 5 16 / 88%);
+  border: 2px solid var(--color-border);
+
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
+  backdrop-filter: blur(8px);
+}
+
+.character-info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    /* Superior esquerdo */
+    linear-gradient(var(--color-border), var(--color-border)) top 12px left
+      12px / 22px 2px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) top 12px left
+      12px / 2px 22px no-repeat,
+    /* Superior direito */
+    linear-gradient(var(--color-border), var(--color-border)) top 12px right
+      12px / 22px 2px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) top 12px right
+      12px / 2px 22px no-repeat,
+    /* Inferior esquerdo */
+    linear-gradient(var(--color-border), var(--color-border)) bottom 12px left
+      12px / 22px 2px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) bottom 12px left
+      12px / 2px 22px no-repeat,
+    /* Inferior direito */
+    linear-gradient(var(--color-border), var(--color-border)) bottom 12px right
+      12px / 22px 2px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) bottom 12px right
+      12px / 2px 22px no-repeat;
+}
+
+.card-eyebrow {
+  margin-bottom: var(--space-2);
+
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+}
+
+#character-name {
+  margin-bottom: var(--space-2);
+
+  font-family: var(--font-display);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.03em;
+
+  position: relative;
+  width: fit-content;
+}
+
+#character-name::after {
+  content: "";
+  display: block;
+  width: 8rem;
+  height: 6px;
+  margin-top: 0.35rem;
+
+  background: linear-gradient(
+    90deg,
+    #a6a0d8 0%,
+    rgb(166 160 216 / 75%) 45%,
+    rgb(166 160 216 / 0%) 100%
+  );
+
+  clip-path: polygon(3% 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.character-tagline {
+  margin-bottom: var(--space-4);
+
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.04em;
+}
+
+.character-description {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  overflow: hidden;
+}
+
+.avatar-actions[hidden] {
+  display: none;
+}
+
+.avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.avatar-actions-primary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.avatar-action-button {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: 10px;
+
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.05em;
+
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.avatar-action-button .button-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.button-frame-fill {
+  fill: #25173a;
+  transition: fill 180ms ease;
+}
+
+.button-frame-border {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 2;
+}
+
+.avatar-action-button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+.avatar-action-button:hover .button-frame-border {
+  stroke: var(--color-text-secondary);
+}
+
+.avatar-action-button:hover .button-frame-fill {
+  fill: var(--color-primary);
+}
+
+.avatar-actions button {
+  width: 100%;
+}
+
+.regenerate-avatar-button {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.05em;
+
+  background-color: #100C18;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.regenerate-avatar-button:hover {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-text-secondary);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   7. ÁREA INFERIOR — PAINEL, SELETORES E MARCA
+   ========================================================= */
+
+.bottom-layout {
+  position: absolute;
+  right: clamp(1.5rem, 3vw, 3rem);
+  bottom: clamp(1.25rem, 3vh, 2.5rem);
+  left: clamp(1.5rem, 3vw, 3rem);
+  z-index: 5;
+
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) minmax(30rem, 2fr) minmax(
+      12rem,
+      1fr
+    );
+  align-items: end;
+  gap: var(--space-5);
+}
+
+/* ---------------------------------------------------------
+   7A. PAINEL DE ORIENTAÇÃO — INFERIOR ESQUERDO
+   --------------------------------------------------------- */
+
+.bottom-left {
+  position: relative;
+
+  max-width: 19rem;
+  padding: var(--space-4);
+
+  background: rgb(8 5 16 / 88%);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+
+  backdrop-filter: blur(6px);
+}
+
+.guidance-icon {
+  width: 2.5rem;
+  height: 2rem;
+  margin-bottom: var(--space-3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guidance-icon span {
+  font-size: 45px;
+  color: var(--color-text-secondary);
+}
+
+.character-status {
+  margin-bottom: var(--space-2);
+
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  letter-spacing: 0.04em;
+}
+
+.guidance-status {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.guidance-decoration {
+  display: block;
+
+  width: 3rem;
+  height: 3px;
+  margin-top: var(--space-4);
+
+  background: var(--color-accent);
+  transform: skewX(-25deg);
+}
+
+/* ---------------------------------------------------------
+   7B. CHAMADA E CARDS — INFERIOR CENTRAL
+   --------------------------------------------------------- */
+
+.character-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+
+  min-width: 0;
+}
+
+.call {
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 65%);
+}
+
+.call-accent {
+  color: var(--color-accent);
+}
+
+.character-options {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+
+  width: 100%;
+}
+
+/* Cartão individual de personagem */
+.character-option {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  flex: 1;
+  min-width: 0;
+  max-width: 9rem;
+
+  padding: var(--space-1);
+
+  color: var(--color-text-primary);
+  text-align: center;
+
+  background: rgb(8 5 16 / 88%);
+  border: 1px solid var(--color-border);
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.character-option:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+/* Estado selecionado */
+.character-option.is-active {
+  border: 2px solid var(--color-primary);
+  background: rgb(41 32 51 / 94%);
+  box-shadow: 0 0 1rem rgb(140 38 248 / 30%);
+}
+
+.option-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: clamp(4rem, 9vh, 7rem);
+
+  overflow: hidden;
+
+  background: linear-gradient(145deg, rgb(41 32 51 / 90%), rgb(8 5 16 / 95%));
+}
+
+/* Espaço para o ícone/avatar personalizado */
+.option-image-placeholder {
+  border: 1px dashed var(--color-border);
+}
+
+.option-name {
+  display: block;
+
+  padding: var(--space-2) var(--space-1);
+
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------
+   7C. MARCA — INFERIOR DIREITO
+   --------------------------------------------------------- */
+
+.footer-brand {
+  justify-self: end;
+  max-width: 16rem;
+
+  padding: var(--space-3);
+  text-align: right;
+
+  background: linear-gradient(
+    270deg,
+    rgb(8 5 16 / 80%),
+    rgb(8 5 16 / 25%),
+    transparent
+  );
+}
+
+.footer-brand-name {
+  margin-bottom: var(--space-1);
+
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  letter-spacing: 0.05em;
+}
+
+.footer-brand-description {
+  color: var(--color-text-secondary);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: var(--line-height-normal);
+}
+
+.footer-decoration {
+  display: block;
+
+  width: 2.5rem;
+  height: 3px;
+  margin-top: var(--space-2);
+  margin-left: auto;
+
+  background: var(--color-accent);
+}
+
+/* =========================================================
+   8. AJUSTE PARA DESKTOPS MAIS BAIXOS OU ESTREITOS
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .character-info {
+    width: min(22rem, 34vw);
+  }
+
+  .bottom-layout {
+    grid-template-columns: minmax(10rem, 0.8fr) minmax(26rem, 2fr);
+  }
+
+  .footer-brand {
+    display: none;
+  }
+
+  .character-stage {
+    width: 44vw;
+  }
+}
+
+@media (max-height: 700px) {
+  .character-stage {
+    bottom: 10rem;
+    height: 55vh;
+  }
+
+  .bottom-layout {
+    bottom: 1rem;
+  }
+
+  .bottom-left {
+    padding: var(--space-3);
+  }
+
+  .guidance-icon {
+    display: none;
+  }
+
+  .character-options {
+    gap: var(--space-2);
+  }
 }
