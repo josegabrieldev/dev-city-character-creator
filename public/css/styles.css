@@ -109,7 +109,7 @@ a:focus-visible {
       rgb(8 5 16 / 5%) 45%,
       rgb(8 5 16 / 78%) 100%
     ),
-    url("../assets/backgrouns/background2.jpg");
+    url("../assets/backgrouns/Praça\ Futurista\ ao\ Entardecer.png");
 
   background-position: center;
   background-size: cover;
@@ -194,6 +194,7 @@ a:focus-visible {
 
   left: 50%;
   bottom: clamp(11rem, 25vh, 17rem);
+  margin-bottom: var(--space-7);
 
   width: min(48vw, 42rem);
   height: min(68vh, 44rem);
@@ -555,7 +556,7 @@ a:focus-visible {
 
   flex: 1;
   min-width: 0;
-  max-width: 9rem;
+  max-width: 12rem;
 
   padding: var(--space-1);
 
@@ -580,7 +581,42 @@ a:focus-visible {
 .character-option.is-active {
   border: 2px solid var(--color-primary);
   background: rgb(41 32 51 / 94%);
-  box-shadow: 0 0 1rem rgb(140 38 248 / 30%);
+  box-shadow:
+  0 0 0.6rem rgb(140 38 248 / 60%),
+  0 0 1.4rem rgb(140 38 248 / 35%);;
+}
+
+.character-option.is-active .option-image {
+  background: linear-gradient(175deg, rgba(54, 20, 92, 0.8), rgb(140, 38, 248, 0.8));
+}
+
+.character-option.is-active .option-name {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(
+    145deg,
+    rgb(140 38 248 / 30%),
+    rgb(8 5 16 / 76%)
+  );
+  color: var(--color-text-primary);
+}
+
+.character-option.is-active .option-name::after {
+  content: "";
+  display: block;
+  width: 2.8rem;
+  height: 3px;
+  margin: 0.35rem auto 0;
+  background: var(--color-accent);
+}
+
+.character-option:not(.is-active):hover .option-name {
+  background: rgb(35 28 49 / 88%);
+  color: var(--color-text-primary);
+}
+
+.character-option:not(.is-active):hover .option-name::after {
+  background: rgba(255, 184, 20, 0.7);
 }
 
 .option-image {
@@ -589,26 +625,110 @@ a:focus-visible {
   justify-content: center;
 
   width: 100%;
-  height: clamp(4rem, 9vh, 7rem);
+  height: clamp(6rem, 16vh, 10rem);
 
   overflow: hidden;
 
   background: linear-gradient(145deg, rgb(41 32 51 / 90%), rgb(8 5 16 / 95%));
 }
 
-/* Espaço para o ícone/avatar personalizado */
-.option-image-placeholder {
-  border: 1px dashed var(--color-border);
+.character-portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+
+  transform: scale(3.5);
+  transform-origin: center top;
 }
 
 .option-name {
   display: block;
+  color: var(--color-text-secondary);
+  background: rgb(38 28 49 / 58%);
+  
 
   padding: var(--space-2) var(--space-1);
 
   font-family: var(--font-display);
   font-size: var(--font-size-base);
   letter-spacing: 0.04em;
+  transition: color 180ms ease;
+}
+
+.character-option .option-name::after {
+  content: "";
+  display: block;
+  width: 2.8rem;
+  height: 3px;
+  margin: 0.35rem auto 0;
+  background: rgba(255, 184, 20, 0.205);
+}
+
+/* Identidade própria do card SUA LENDA — inativo */
+.character-option-legend {
+  box-shadow: 0 0 0.45rem rgb(140 38 248 / 18%);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.option-image-placeholder {
+  background: linear-gradient(
+    145deg,
+    rgb(255 184 19 / 15%),
+    rgb(16 11 24 / 96%)
+  );
+}
+
+/* Nome SUA LENDA — inativo */
+.character-option-legend .option-name {
+  color: var(--color-primary);
+}
+
+/* Traço lavanda — inativo */
+.character-option-legend .option-name::after {
+  background: rgb(196 181 253 / 35%);
+}
+
+/* Hover do card SUA LENDA, enquanto inativo */
+.character-option-legend:not(.is-active):hover .option-name {
+  background: rgb(255 184 19 / 10%);
+  color: var(--color-text-primary);
+}
+
+.character-option-legend:not(.is-active):hover .option-image-placeholder {
+  background: linear-gradient(
+    145deg,
+    rgb(140 38 248 / 30%),
+    rgb(8 5 16 / 76%)
+  );
+}
+
+.character-option.character-option-legend:not(.is-active):hover .option-name::after {
+  background: var(--color-primary);
+}
+
+/* Selecionado: fundo violeta e brilho */
+.character-option.character-option-legend.is-active {
+  background: rgb(41 32 51 / 94%);
+
+  box-shadow:
+    0 0 0.6rem rgb(140 38 248 / 65%),
+    0 0 1.4rem rgb(140 38 248 / 35%);
+}
+
+/* Nome SUA LENDA — selecionado */
+.character-option.character-option-legend.is-active .option-name {
+  color: var(--color-accent);
+}
+
+/* Traço âmbar vivo — selecionado */
+.character-option.character-option-legend.is-active .option-name::after {
+  background: var(--color-primary);
 }
 
 /* ---------------------------------------------------------
